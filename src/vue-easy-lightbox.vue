@@ -279,6 +279,7 @@
       this.isTicking = false
     }
     handleMouseLeave(e: MouseEvent) {
+      if (!this.checkMoveable(e.button)) return
       cancelAnimationFrame(this.rafId)
       this.isDraging = false
       this.isTicking = false
