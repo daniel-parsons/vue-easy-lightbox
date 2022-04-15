@@ -6,6 +6,7 @@
       :class="[`${prefixCls}-img-modal`, `${prefixCls}-modal`]"
       @click.self="closeDialog"
       @wheel="onWheel"
+      @mouseleave="handleMouseLeave"
     >
       <transition
         :name="`${prefixCls}-fade`"
@@ -272,6 +273,12 @@
       e.stopPropagation()
     }
     handleMouseUp(e: MouseEvent) {
+      if (!this.checkMoveable(e.button)) return
+      cancelAnimationFrame(this.rafId)
+      this.isDraging = false
+      this.isTicking = false
+    }
+    handleMouseLeave(e: MouseEvent) {
       if (!this.checkMoveable(e.button)) return
       cancelAnimationFrame(this.rafId)
       this.isDraging = false
